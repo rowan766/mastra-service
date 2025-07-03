@@ -3,6 +3,7 @@ import { Memory } from '@mastra/memory';
 import { LibSQLStore } from '@mastra/libsql';
 import { AutoCodeReviewTool } from '../tools/AutoCodeReviewTool';
 import { deepseek } from '@ai-sdk/deepseek';
+import { openai } from '@ai-sdk/openai';
 
 export const codeReviewerAgent = new Agent({
 	name: 'codeReviewerAgent',
@@ -23,7 +24,8 @@ export const codeReviewerAgent = new Agent({
   
   Use the AutoCodeReviewTool to inspect the given code. 
   `,
-	model: deepseek('deepseek-chat'),
+	// model: deepseek('deepseek-chat'),
+	model: openai('gpt-3.5-turbo'), // 使用 OpenAI GPT-4o-mini，性价比高
 	tools: { AutoCodeReviewTool },
 	memory: new Memory({
 		storage: new LibSQLStore({
